@@ -11,7 +11,7 @@ public class EjNumeroBinarioGuillamon {
 		char posicion;
 		int suma = 0;
 		int operacion = 0;
-		int potencia = 0;
+		int potencia = 0; //hola
 
 		System.out.println(
 				"Este es un programa que convierte numeros binarios a decimal, ahora, introduce un numero binario.");
