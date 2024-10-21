@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class EjContraseña {
 
 	public static void main(String[] args) {
+		
 		String contrasena1, contrasena2;
 		boolean verificacion;
 		String resultado;

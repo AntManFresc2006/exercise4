@@ -10,32 +10,36 @@ public class EjNumeroBinarioGuillamon {
 		int lectura;
 		char posicion;
 		int suma = 0;
-		int operacion = 0;
-		int potencia = 0; //hola
+		int potencia = 0; //puse un hola
 
 		System.out.println(
-				"Este es un programa que convierte numeros binarios a decimal, ahora, introduce un numero binario.");
-		System.out.println("Si introduces cualquier numero que no sea 1 o 0, el numero instantaneamente sera 0.");
+				"Dime un numero binario, si introduces cualquier numero que no sea 1 o 0, el programa introducira un numero erroneo.");
 		numero = sc.nextLine();
 		lectura = numero.length();
-		
 
 		do {
+			int operacion = 1;
 			--lectura;
 			posicion = numero.charAt(lectura);
 
 			if (posicion == '1') {
-				operacion = (int) (Math.pow(2, potencia));
-			}
-			else if (posicion == '0') {
+				if (potencia == 0) {
+					operacion = 1;
+				} else {
+					for (int i = 0; i < potencia; i++) {
+						operacion = operacion * 2;
+					}
+				}
+				System.out.println(2 + "*" + potencia + " = " + operacion);
+			} else if (posicion == '0') {
 				operacion = 0;
 			}
-			else {break;}
-			
-			++potencia;
-			suma += operacion;
-		} while (0 < lectura);
 
-		System.out.println("Tu numero convertido a decimal es: " + suma);
+			++potencia;
+			suma = suma + operacion;
+
+		} while (0 < lectura && (posicion == '1' || posicion == '0'));
+
+		System.out.println("Tu numero convertido a binario es: " + suma);
 	}
 }
