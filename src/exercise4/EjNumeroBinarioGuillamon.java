@@ -10,7 +10,7 @@ public class EjNumeroBinarioGuillamon {
 		int lectura;
 		char posicion;
 		int suma = 0;
-		int potencia = 0; //puse un hola
+		int potencia = 0;
 
 		System.out.println(
 				"Dime un numero binario, si introduces cualquier numero que no sea 1 o 0, el programa introducira un numero erroneo.");
