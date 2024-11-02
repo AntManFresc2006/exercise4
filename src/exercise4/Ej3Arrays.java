@@ -132,7 +132,7 @@ public class Ej3Arrays {
 
 				busqueda = sc.nextInt();
 
-				while (busqueda < 0 || busqueda > nombre.length) {
+				while (busqueda < 0 || busqueda > nombre.length || busqueda > caja+1) {
 					System.out.println("Error, vuelve a introducir un numero.");
 					busqueda = sc.nextInt();
 				}

@@ -6,18 +6,13 @@ public class Fibonacci {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int numero=1;
-		int resultado = 0;
-		int limit;
-		System.out.println("Esta es la famosa sucesion de Fibonacci, dime hasta que numero quieres acabar esta sucesion.");
-		limit = sc.nextInt();
+		long fibonacci[] = new long[30];
+		System.out.println("Hasta que numero quieres empezar.");
+		fibonacci[0] = sc.nextInt();
 
-		do {
-			resultado += numero;
-			System.out.println(resultado);
-			resultado += numero;
-			System.out.println(resultado);
-		} while (resultado < limit);
-		
+		for (int i = 2; i<30; i++) {
+			 fibonacci[i] = fibonacci [i-1] + fibonacci[i-2];
+			 System.out.println(fibonacci[i]+ " = " +fibonacci [i-1]+" + "+fibonacci[i-2]+".");
+		}
 	}
 }
