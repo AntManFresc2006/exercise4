@@ -3,14 +3,12 @@ package exercise4;
 import java.util.Scanner;
 
 public class AleatoriosMatriz {
-	
-	
-	
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-		int opcion, cantidad, texto, total;
-		String ola = randoms(filas, columnas, cadena);
+		int opcion;
+		String cadena;
+		//int [][] nuevaMatriz = randoms(filas, columnas);
 
 		do {
 
@@ -19,14 +17,13 @@ public class AleatoriosMatriz {
 
 			switch (opcion) {
 			case 1:
-
-				System.out.println("Dime la cantidad de filas que quiere que tenga tu matriz.");
-				int filas = sc.nextInt();
-				System.out.println("Dime la cantidad de columnas que quiere que tenga tu matriz.");
-				int columnas = sc.nextInt();
-
+			
+				int filas;
+				int columnas;
+				//int[][] ola = randoms(cadena, filas, columnas);
+				//System.out.println(ola);
 				System.out.println("Tu tabla es... ");
-				System.out.println(ola);
+				
 				break;
 			case 0:
 				System.out.println("Adios.");
@@ -40,27 +37,30 @@ public class AleatoriosMatriz {
 
 		sc.close();
 	}
-	public static String randoms(int filas, int columnas, String cadena) {
+	public static int [][] randoms(Scanner sc, int filas, int columnas) {
+		//Aqui se piden las filas y columnas
+		System.out.println("Dime la cantidad de filas que quiere que tenga tu matriz.");
+		filas = sc.nextInt();
+		System.out.println("Dime la cantidad de columnas que quiere que tenga tu matriz.");
+		columnas = sc.nextInt();
+		
 		int[][] matriz = new int[filas][columnas];
 		int max = 100;
 		int min = 0;
 		int range = (max - min) + 1;
+		
+		//Este es el for donde la matriz va a llenarse de numeros randoms
 		for (int i = 0; i < columnas; i++) {
-			cadena = "";
 			for (int n = 0; n < filas; n++) {
 				int random = (int) ((range * Math.random()) + min);
 				System.out.println(random);
 				matriz[filas][columnas] = random;
-				if (n == filas-1) {
-					cadena += matriz[filas][columnas];
-				}
-				else {
-					cadena += matriz[filas][columnas]+", ";
-				}
+				
 			}
-			System.out.println("\n ("+cadena+")");
 		}
-		return cadena;
+		sc.close();
+		
+		return matriz;
 	}
 	
 	
