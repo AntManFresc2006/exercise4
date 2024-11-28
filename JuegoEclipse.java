@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class JuegoEclipse {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int eleccion, personajeUno, personajeDos, personajeTres, personajeCuatro;
-		String personaje, enemigo;
+		int eleccion, personajeUno, personajeDos, personajeTres, personajeCuatro, dado, verificado, verificadoDos;
+		String cadena;
 
 		System.out.println("\n Saludos, este es un juego de batalla de hasta 5 personajes, que son los siguientes.");
 		System.out.println("\t1er personaje: Eclipse.");
@@ -24,45 +24,42 @@ public class JuegoEclipse {
 				System.out.println(
 						"¡¡¡Perfecto!!! ¿Cual personaje quieres escoger? Escoge pulsando un numero del 1 al 6.");
 				personajeUno = sc.nextInt();
-				personajeUno = Reeleccion(personajeUno, -999);
-				personaje = "";
-				enemigo = "";
-				sysoPersonaje(personajeUno, personaje);
-				personajeDos = randomizer(personajeUno, 0, 0, 0);
-				sysoEnemigo(personajeDos, personaje);
-				personaje = nombrePj(personajeUno, personaje);
-				enemigo = nombrePj(personajeDos, enemigo);
-				
-				System.out.println(personaje+" V/s "+enemigo+". ");
-
-				System.out.println("\n¡¡¡Que comience el combate!!!");
+				verificado = reeleccion(personajeUno);
+				cadena = "";
+				sysoPersonaje(verificado, cadena);
+				personajeDos = randomizer();
+				cadena = "";
+				sysoEnemigo(personajeDos, cadena);
 				break;
 			case 2:
 				System.out.println(
 						"¡¡¡Perfecto!!! ¿Cual personaje quieres escoger? Escoge pulsando un numero del 1 al 6.");
 				personajeUno = sc.nextInt();
-				personajeUno = Reeleccion(personajeUno, -999);
-				personaje = "";
-				sysoPersonaje(personajeUno, personaje);
+				verificado = reeleccion(personajeUno);
+				cadena = "";
+				sysoPersonaje(verificado, cadena);
 				personajeDos = sc.nextInt();
-				personajeDos = Reeleccion(personajeDos, personajeUno);
-				sysoPersonaje(personajeDos, personaje);
-				personajeTres = randomizer(personajeUno, personajeDos, 0, 0);
-				sysoEnemigo(personajeTres, personaje);
-				personajeCuatro = randomizer(personajeUno, personajeDos, personajeTres, 0);
-				sysoEnemigo(personajeCuatro, personaje);
+				verificadoDos = segundaReeleccion(personajeUno, personajeDos);
+				cadena = "";
+				sysoPersonaje(verificadoDos, cadena);
+				personajeTres = randomizer();
+				cadena = "";
+				sysoEnemigo(personajeTres, cadena);
+				personajeCuatro = randomizer();
+				cadena = "";
+				sysoEnemigo(personajeCuatro, cadena);
 				break;
 			case 3:
 				String[][] informacion = new String[6][7];
 				System.out.println(
 						"\nGenial, pulsa un numero del personaje del cual quieres buscar informacion, y a continuacion te mostrare su informacion.");
-				personajeUno = sc.nextInt();
-				personajeUno = Reeleccion(personajeUno, -999);
-				personajeUno = personajeUno - 1;
+				int personajeElegir = sc.nextInt();
+				verificado = reeleccion(personajeElegir);
+				verificado = verificado - 1;
 				informacion(informacion);
 				String[][] character = informacion;
 
-				infoPJ(character, personajeUno);
+				infoPJ(character, verificado);
 
 				break;
 			case 4:
@@ -73,7 +70,6 @@ public class JuegoEclipse {
 				System.out.println(eleccion + "\n no es un numero de nuestro menu, vuelve a intentarlo.");
 			}
 		} while (eleccion != 4);
-		sc.close();
 	}
 
 	public static String[][] informacion(String[][] informacion) {
@@ -123,28 +119,6 @@ public class JuegoEclipse {
 		return informacion;
 	}
 
-public static String nombrePj(int personaje, String cadena) {
-	if (personaje == 1) {
-		cadena += "Eclipse";
-	}
-	if (personaje == 2) {
-		cadena += "Evil";
-	}
-	if (personaje == 3) {
-		cadena += "Cosmic";
-	}
-	if (personaje == 4) {
-		cadena += "Elina";
-	}
-	if (personaje == 5) {
-		cadena += "Keravnos";
-	}
-	if (personaje == 6) {
-		cadena += "ChuhZmR";
-	}
-	return cadena;
-}
-
 	public static void infoPJ(String[][] informacion, int numero) {
 		System.out.println(informacion[numero][0]);
 		System.out.println("Aqui te enseñare todas las habilidades de tu personaje. :)");
@@ -158,38 +132,39 @@ public static String nombrePj(int personaje, String cadena) {
 
 	}
 
-	public static int Reeleccion(int primerPersonaje, int segundoPersonaje) {
+	public static int segundaReeleccion(int primerPersonaje, int segundoPersonaje) {
 		Scanner sc = new Scanner(System.in);
 
+		while (segundoPersonaje < 1 || segundoPersonaje > 6) {
+			System.out.println(segundoPersonaje
+					+ " no es un numero asignado a los 6 personajes de nuestro roster, por favor, vuelve a intentarlo.");
+			segundoPersonaje = sc.nextInt();
+		}
+
+		while (segundoPersonaje == primerPersonaje) {
+
+			System.out.println("Error, no se puede escoger dos veces al mismo personaje.");
+			segundoPersonaje = sc.nextInt();
+		}
+		return segundoPersonaje;
+	}
+
+	public static int reeleccion(int primerPersonaje) {
+		Scanner sc = new Scanner(System.in);
 		while (primerPersonaje < 1 || primerPersonaje > 6) {
 			System.out.println(primerPersonaje
 					+ " no es un numero asignado a los 6 personajes de nuestro roster, por favor, vuelve a intentarlo.");
 			primerPersonaje = sc.nextInt();
 		}
-		if (segundoPersonaje != -999) {
-			while (segundoPersonaje == primerPersonaje || segundoPersonaje < 1 || segundoPersonaje > 6) {
-				if (segundoPersonaje == primerPersonaje) {
-					System.out.println("Error, no se puede escoger dos veces al mismo personaje.");
-				} else if (segundoPersonaje < 1 || segundoPersonaje > 6) {
-					System.out.println(segundoPersonaje
-							+ " no es un numero asignado a los 6 personajes de nuestro roster, por favor, vuelve a intentarlo.");
-				}
-
-				segundoPersonaje = sc.nextInt();
-			}
-		}
-
 		return primerPersonaje;
+
 	}
 
-	public static int randomizer(int personaje1, int personaje2, int personaje3, int personaje4) {
+	public static int randomizer() {
 		int max = 6;
 		int min = 1;
 		int range = (max - min) + min;
 		int random = (int) ((range * Math.random()) + min);
-		while (random == personaje1 || random == personaje2 || random == personaje3 || random == personaje4) {
-			random = (int) ((range * Math.random()) + min);
-		}
 		return random;
 	}
 
@@ -217,7 +192,7 @@ public static String nombrePj(int personaje, String cadena) {
 	}
 
 	public static void sysoEnemigo(int personaje, String cadena) {
-		cadena = "Tu enemigo es... ";
+		cadena = "Y tu enemigo es... ";
 		if (personaje == 1) {
 			cadena += "Eclipse.";
 		}
@@ -238,5 +213,4 @@ public static String nombrePj(int personaje, String cadena) {
 		}
 		System.out.println(cadena);
 	}
-
 }
